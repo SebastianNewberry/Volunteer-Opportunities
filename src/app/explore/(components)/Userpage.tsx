@@ -49,6 +49,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Session } from "next-auth";
 
 type Skill = {
   id: string;
@@ -62,11 +63,13 @@ export default function Userpage({
   skills,
   userId,
   currentPage,
+  authStatus,
 }: {
   initialListings: any;
   skills: Skill[];
   userId: string;
   currentPage: number;
+  authStatus: Session;
 }) {
   const {
     userStatus,
@@ -159,6 +162,7 @@ export default function Userpage({
 
   const volunteerSpecificListing = async (listingId: string) => {
     await volunteerForSpecificOpportunity(listingId);
+    initializeListings();
     revalidateListingPaths();
     revalidateIndividualListing(listingId);
   };
@@ -422,8 +426,19 @@ export default function Userpage({
                                 ></img>
                               </div>
                               <div>
-                                {userStatus &&
-                                userId == listing.organizations.creator ? (
+                                {!authStatus ? (
+                                  <Button
+                                    onClick={() => {
+                                      router.push("/login");
+                                    }}
+                                    disabled={listing.volunteers.some(
+                                      (vol: any) => vol.id == userId
+                                    )}
+                                  >
+                                    Sign in to Volunteer
+                                  </Button>
+                                ) : userStatus &&
+                                  userId == listing.organizations.creator ? (
                                   <div className="flex flex-col gap-4 items-center">
                                     <Button
                                       onClick={() =>

@@ -7,6 +7,7 @@ import {
 } from "./actions";
 
 import Userpage from "./(components)/Userpage";
+import { auth } from "@/auth";
 
 const limit = 2;
 
@@ -23,6 +24,7 @@ export default async function Explore({
   });
   const [skills, skillsError] = await getAllSkills();
   const [userId, getUserError] = await getUser();
+  const authStatus = await auth();
 
   return (
     <>
@@ -31,6 +33,7 @@ export default async function Explore({
         skills={!skills ? [] : skills}
         userId={userId ? userId : ""}
         currentPage={parseInt(searchParams?.page || "0")}
+        authStatus={authStatus}
       />
     </>
   );
