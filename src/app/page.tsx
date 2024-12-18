@@ -102,7 +102,7 @@ export default function Home() {
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="container">
+              <div className="container mx-auto">
                 <div className="flex flex-col sm:flex-row items-center jusify-center gap-5">
                   <div className="flex flex-col justify-center items-center flex-1">
                     <img
