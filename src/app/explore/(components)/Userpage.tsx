@@ -358,7 +358,7 @@ export default function Userpage({
               <h1 className="text-2xl font-bold text-center">Listings</h1>
               {listings.length > 0 ? (
                 <div className="flex flex-col gap-10 justify-center items-center ">
-                  <div className="h-full grid grid-cols-1 xl:grid-cols-2 flex-wrap max-h-[700px] overflow-y-auto mt-5 gap-4">
+                  <div className="h-full w-full grid grid-cols-1 xl:grid-cols-2 flex-wrap max-h-[700px] overflow-y-auto mt-5 gap-4">
                     {listings?.map((listing: any) => {
                       return (
                         <Card
